@@ -1,0 +1,41 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:mostlyserious/craft-block-audit.git"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "4.3.4",
+        "craftcms/element-api": "3.0.1.1",
+        "spicyweb/craft-neo": "3.5.11",
+        "vlucas/phpdotenv": "^5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\": "modules/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.0.2"
+        },
+        "allow-plugins": {
+            "craftcms/plugin-installer": true,
+            "yiisoft/yii2-composer": true,
+            "fortrabbit/craft-auto-migrate": true,
+            "treeware/plant": true
+        }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "@php -r \"copy('.env.example', '.env');\"",
+            "@php -r \"unlink('composer.json');\"",
+            "@php -r \"rename('composer.json.default', 'composer.json');\"",
+            "@composer dump-autoload -o",
+            "@php craft setup/keys"
+        ]
+    }
+}
